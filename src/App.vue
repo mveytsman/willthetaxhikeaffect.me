@@ -41,7 +41,7 @@ export default {
       } else if (this.income >= 2220264 && this.income <= 10000000) {
         return "No, but congrats on being in the top 0.1%!"
       } else {
-        return "Yes, We're sorry for your loss."
+        return "Yes. We're sorry for your loss."
       }
     }
   }
