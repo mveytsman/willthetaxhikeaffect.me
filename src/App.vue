@@ -4,7 +4,7 @@
   <p>In a <a href="https://www.cnn.com/2019/01/04/politics/alexandria-ocasio-cortez-tax-climate-change-plan/index.html">60 Minutes interview</a>, Alexandria Ocasio-Cortez (D-NY) proposed a <b>70%</b> marginal income tax rate for Americans earning <b>$10,000,000</b> or more.</p>
   <p>This calculator will help you figure out how such a tax will affect you.</p>
   <h2>How much did you make last year?</h2>
-  <vue-numeric id="income" currency="$" separator="," v-model="income"></vue-numeric>
+  <vue-numeric id="income" currency="$" separator="," :empty-value="24000" v-model="income"></vue-numeric>
   <div id="results">
     <h2>Are you affected?</h2>
     <p>{{ results }}</p>
@@ -23,7 +23,7 @@ export default {
   },
   data () {
     return {
-      income: 24000
+      income: ''
     }
   },
   computed: {
@@ -38,7 +38,7 @@ export default {
         return "No, but congrats on being in the top 5%!"
       } else if (this.income >= 480930 && this.income < 2220264) {
         return "No, but congrats on being in the top 1%!"
-      } else if (this.income >= 2220264 && this.income < 10000000) {
+      } else if (this.income >= 2220264 && this.income <= 10000000) {
         return "No, but congrats on being in the top 0.1%!"
       } else {
         return "Yes, We're sorry for your loss."
