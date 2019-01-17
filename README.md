@@ -1,4 +1,4 @@
-# willthetaxhikeaffect.me
+# Will the Tax Hike Affect Me?
 
 ## Project setup
 ```
