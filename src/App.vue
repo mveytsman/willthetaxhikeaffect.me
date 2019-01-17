@@ -5,6 +5,7 @@
   <p>This calculator will help you figure out how such a tax will affect you.</p>
   <h2>How much did you make last year?</h2>
   <vue-numeric id="income" currency="$" separator="," :empty-value="24000" v-model="income"></vue-numeric>
+  <vue-slider ref="slider" max="11" interval=".01" tooltip="false" v-model="logIncome"></vue-slider>
   <div id="results">
     <h2>Are you affected?</h2>
     <p>{{ results }}</p>
@@ -15,11 +16,14 @@
 
 <script>
 import VueNumeric from 'vue-numeric'
+import vueSlider from 'vue-slider-component'
+
 
 export default {
   name: 'app',
   components: {
-    VueNumeric
+    VueNumeric,
+    vueSlider
   },
   data () {
     return {
@@ -27,6 +31,19 @@ export default {
     }
   },
   computed: {
+    logIncome: {
+      get() {
+        if (this.income > 1) {
+          return Math.log10(this.income)
+        }
+        else {
+          return 0
+        }
+      },
+      set(value) {
+        this.income = 10**value;
+      }
+    },
     results() {
       if (this.income < 79655) {
         return "No."
@@ -40,8 +57,10 @@ export default {
         return "No, but congrats on being in the top 1%!"
       } else if (this.income >= 2220264 && this.income <= 10000000) {
         return "No, but congrats on being in the top 0.1%!"
-      } else {
+      } else if (this.income > 10000000 && this.income < 78500000000) {
         return "Yes. We're sorry for your loss."
+      } else {
+        return "Yes. We're sorry to hear about the divorce Jeff."
       }
     }
   }
